@@ -37,3 +37,30 @@ async function signup(event) {
         }
     }
 }
+
+
+async function login(event){
+    try {
+        event.preventDefault();
+        const userdetails = {
+            email : event.target.email.value,
+            password : event.target.password.value
+        }
+
+        console.log(userdetails);
+
+        const res = await axios.post("http://localhost:3000/user/login", userdetails);
+
+        if(res.status === 200){
+            alert(res.data.message);
+        }
+    } catch (error) {
+        if(error.response && error.response.status === 401){
+            alert(error.response.data.message);
+        }else if(error.response && error.response.status === 404){
+            alert(error.response.data.message);
+        }else if(error.response && error.response.status === 500){
+            alert(error.response.data.message);
+        }
+    }
+}

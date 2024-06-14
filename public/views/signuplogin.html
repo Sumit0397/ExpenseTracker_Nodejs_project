@@ -14,15 +14,15 @@
   <div class="container">
     <div class="forms-container">
       <div class="signin-signup">
-        <form onsubmit="return false" class="sign-in-form">
+        <form onsubmit="login(event)" class="sign-in-form">
           <h1 class="title">Sign In</h1>
           <div class="input-field">
             <i class="fas fa-envelope"></i>
-            <input type="email" placeholder="Enter your email" required name="loginEmail">
+            <input type="email" placeholder="Enter your email" required name="email" autocomplete="off">
           </div>
           <div class="input-field">
             <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Password" required name="loginPasswprd">
+            <input type="password" placeholder="Password" required name="password" autocomplete="off">
           </div>
           <p class="forgotpas"><a href="/password/forgotPasswordPage">Forgot Password?</a></p>
           <input type="submit" value="log in" class="btn solid">

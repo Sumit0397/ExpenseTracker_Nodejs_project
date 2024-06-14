@@ -9,4 +9,6 @@ router.get("/" , userController.getAuthenticationPage);
 
 router.post("/signup" , userController.postUserSignup);
 
+router.post("/login", userController.postUserLogin);
+
 module.exports = router;
