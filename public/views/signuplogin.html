@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../css/signuplogin.css" />
+  <title>Signup & Login Page</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="forms-container">
+      <div class="signin-signup">
+        <form onsubmit="return false" class="sign-in-form">
+          <h1 class="title">Sign In</h1>
+          <div class="input-field">
+            <i class="fas fa-envelope"></i>
+            <input type="email" placeholder="Enter your email" required name="loginEmail">
+          </div>
+          <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="Password" required name="loginPasswprd">
+          </div>
+          <p class="forgotpas"><a href="/password/forgotPasswordPage">Forgot Password?</a></p>
+          <input type="submit" value="log in" class="btn solid">
+        </form>
+
+        <form onsubmit="signup(event)" class="sign-up-form">
+          <h1 class="title">Sign Up</h1>
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="Enter your name" required name="name" autocomplete="off">
+          </div>
+          <div class="input-field">
+            <i class="fas fa-envelope"></i>
+            <input type="email" placeholder="Enter your email" required name="email" autocomplete="off">
+          </div>
+          <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="Password" required name="password" minlength="6">
+          </div>
+          <div class="checkbox">
+            <input type="checkbox" name="checkbox" id="checkbox" required>
+            <label for="checkbox">I accept all terms & conditions.</label>
+          </div>
+          <input type="submit" value="sign up" class="btn solid">
+        </form>
+      </div>
+    </div>
+
+    <div class="panels-container">
+      <div class="panel left-panel">
+        <div class="content">
+          <h3>New here?</h3>
+          <p>Join with us by entering your credentials.</p>
+          <button class="btn transparent" id="sign-up-btn">
+            sign up
+          </button>
+        </div>
+        <img src="../img/sign-up.png" alt="sign-up" class="image">
+      </div>
+
+      <div class="panel right-panel">
+        <div class="content">
+          <h3>One of us?</h3>
+          <p>Welcome back , please enter your credentials for enjoying our services.</p>
+          <button class="btn transparent" id="sign-in-btn">
+            sign in
+          </button>
+        </div>
+        <img src="../img/sign-in.png" alt="sign-in" class="image">
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/signuplogin.js"></script>
+  <script 
+    src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js" 
+    integrity="sha512-JSCFHhKDilTRRXe9ak/FJ28dcpOJxzQaCd3Xg8MyF6XFjODhy/YMCM8HW0TFDckNHWUewW+kfvhin43hKtJxAw==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer">
+  </script>
+
+</html>
