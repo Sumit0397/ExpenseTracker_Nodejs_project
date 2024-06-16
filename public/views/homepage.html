@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="../css/homePage.css">
+</head>
+
+<body>
+    <!-- NAVBAR SECTION START -->
+
+    <div class="navbar-container">
+        <header>
+            <section class="logo-section">
+                <img src="../img/rupee.png" alt="rupee" class="rupee-logo" style="color: #fff;">
+                <h1 class="logo-title">Expensify</h1>
+            </section>
+            <nav class="nav-section">
+                <ul class="left-links">
+                    <li>
+                        <a href="/homepage">Home</a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="onClickAlert()">Reports &#128081</a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="onClickAlert()">LeaderBoard &#128081</a>
+                    </li>
+                </ul>
+
+                <section class="right-links">
+                    <button class="btn transparent">
+                        Buy Premium &#128081
+                    </button>
+                    <button class="btn solid" onclick="logout()">
+                        Log out
+                    </button>
+                </section>
+            </nav>
+            <section class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </section>
+        </header>
+        <nav class="mobile-nav-section">
+            <ul>
+                <li>
+                    <a href="/homepage">Home</a>
+                </li>
+                <li>
+                    <a href="#" id="reportsLink" onclick="onClickAlert();">Reports &#128081</a>
+                </li>
+                <li>
+                    <a href="#" id="leaderboardLink" onclick="onClickAlert();">LeaderBoard &#128081</a>
+                </li>
+            </ul>
+            <section class="mobile-nav-button">
+                <button class="btn transparent" id="buyPremiumBtn">
+                    Buy Premium &#128081
+                </button>
+                <button class="btn solid" onclick="logout()">
+                    Log out
+                </button>
+            </section>
+        </nav>
+    </div>
+
+    <!-- NAVBAR SECTION END -->
+
+    <!-- EXPENSE FORM START -->
+
+    <section class="expense-form-container">
+        <form id="expense-form" onsubmit="addexpense(event)">
+            <div class="category-section">
+                <label for="category">Category:</label>
+                <select name="category" id="category" required>
+                    <option value="" style="text-align: center; font-size: 1rem; font-weight: 500;">--Choose Your
+                        Category--</option>
+                    <option value="Mobile & Accessories">Mobile & Accessories</option>
+                    <option value="Fashion & Beauty">Fashion & Beauty</option>
+                    <option value="Groceris & Pet Supplies">Groceries & Pet Supplies</option>
+                    <option value="Home , Furniture & Appliances">Home , Furniture & Appliances</option>
+                    <option value="Music , Video & Gaming">Music , Video & Gaming</option>
+                    <option value="Books & Education">Books & Education</option>
+                    <option value="Toys , Children & Baby">Toys , Children & Baby</option>
+                    <option value="Payments & Booking">Payments & Booking</option>
+                    <option value="Automotive">Automotive</option>
+                    <option value="Office & Professional">Office & Professional</option>
+                    <option value="Sports , Outdoor & Travel">Sports , Outdoor & Travel</option>
+                    <option value="Gifting">Gifting</option>
+                    <option value="Bills & EMI's">Bills & EMI's</option>
+                    <option value="Others">Others</option>
+                </select>
+            </div>
+
+            <div class="input-field">
+                <label for="description">Description:</label>
+                <input type="text" name="description" id="description" required>
+            </div>
+
+            <div class="input-field">
+                <label for="amount" style="display: flex; justify-content: space-around; margin-left: 12px;">
+                    <span>Amount:</span>
+                    <span style="font-size: 1.2rem; margin-top: -2px;">&#8377;</span>
+                </label>
+                <input type="number" name="amount" id="amount" required>
+            </div>
+
+            <div class="input-field">
+                <label for="date">
+                    Date :
+                </label>
+                <input type="date" name="date" id="date" required>
+            </div>
+
+            <div class="actions">
+                <button class="expense-btn" type="submit">
+                    Add Expense
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <!-- EXPENSE FORM END -->
+
+    <!-- EXPENSE DATA TABLE START -->
+
+    <section class="expense-table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody id="expense_table">
+                
+            <tbody>
+        </table>
+    </section>
+
+
+    <script src="../js/homePage.js"></script>
+    <script>
+        function onClickAlert() {
+            alert("Buy Premium to access this feature.");
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js"
+        integrity="sha512-JSCFHhKDilTRRXe9ak/FJ28dcpOJxzQaCd3Xg8MyF6XFjODhy/YMCM8HW0TFDckNHWUewW+kfvhin43hKtJxAw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    </script>
+</body>
+
+</html>

@@ -9,6 +9,7 @@ dotnenv.config();
 const app = express();
 
 const userRouter = require("./routers/userRouter");
+const expenseRouter = require("./routers/expenseRouter");
 
 app.use(bodyParser.urlencoded({extended : false}));
 app.use(bodyParser.json());
@@ -17,6 +18,10 @@ app.use(cors());
 app.use("/" , userRouter);
 
 app.use("/user" , userRouter);
+
+app.use("/homepage" , expenseRouter);
+
+app.use("/expense" , expenseRouter);
 
 sequelize.sync()
 .then(() => {

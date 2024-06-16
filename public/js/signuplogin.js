@@ -47,12 +47,11 @@ async function login(event){
             password : event.target.password.value
         }
 
-        console.log(userdetails);
-
         const res = await axios.post("http://localhost:3000/user/login", userdetails);
 
         if(res.status === 200){
             alert(res.data.message);
+            window.location.href = "/homepage";
         }
     } catch (error) {
         if(error.response && error.response.status === 401){
@@ -64,3 +63,4 @@ async function login(event){
         }
     }
 }
+
