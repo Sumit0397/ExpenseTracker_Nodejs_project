@@ -1,6 +1,14 @@
 const path = require("path");
 const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
+function generateAccessToken(id , email){
+    return jwt.sign(
+        {userId : id , email : email},
+        "kjhsgdfiuiew889kbasgdfskjabsdfjlabsbdljhsd"
+    )
+}
 
 const getAuthenticationPage = (req, res, next) => {
     res.sendFile(path.join(__dirname, "../", "public", "views", "signuplogin.html"));
@@ -38,7 +46,7 @@ const postUserLogin = async (req, res, next) => {
         if (user) {
             bcrypt.compare(password, user.password, (err, result) => {
                 if (result === true) {
-                    res.status(200).json({ message: 'user logged in succesfully!', success: true })
+                    res.status(200).json({ message: 'user logged in succesfully!', success: true , token: generateAccessToken(user.id , user.email) });
                 } else {
                     res.status(401).json({ message: 'Password is incorrect!', success: false })
                 }

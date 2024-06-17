@@ -9,7 +9,7 @@ const addExpense = async (req,res,next) => {
     try {
         const {date , category , description , amount} = req.body;
 
-        await Expense.create({date , category , description , amount})
+        await Expense.create({date , category , description , amount , userId : req.user.id})
         .then((data) => {
             res.status(200).json(data);
         }).catch((err) => {
@@ -22,13 +22,14 @@ const addExpense = async (req,res,next) => {
 
 const getAllExpenses = async (req,res,next) => {
     try {
-        await Expense.findAll()
+        await Expense.findAll({where : {userId : req.user.id}})
         .then((data) => {
             res.status(200).json(data);
         }).catch((err) => {
             throw new Error(err);
         })
     } catch (error) {
+        console.log(error);
         res.status(500).json({message : error , success : false})
     }
 }
@@ -37,7 +38,7 @@ const deleteExpense = async (req,res,next) => {
     try {
         const id = req.params.expenseid;
 
-        Expense.destroy({where : {id: id}})
+        Expense.destroy({where : {id: id , userId : req.user.id}})
         .then((noofrows) => {
             if(noofrows === 0){
                 return res.status(404).json({success: false, message: 'Expense doenst belong to the user'})
@@ -49,13 +50,13 @@ const deleteExpense = async (req,res,next) => {
     }
 }
 
-const editExpense = async (req,res,next) => {
-    try {
+// const editExpense = async (req,res,next) => {
+//     try {
         
-    } catch (error) {
-        res.status(500).json({message : error , success : false})
-    }
-}
+//     } catch (error) {
+//         res.status(500).json({message : error , success : false})
+//     }
+// }
 
 module.exports = {
     getHomePage,

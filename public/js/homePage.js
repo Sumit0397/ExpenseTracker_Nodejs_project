@@ -15,6 +15,8 @@ async function addexpense(event) {
     try {
         event.preventDefault();
 
+        const token = localStorage.getItem('token');
+
         const expensedetails = {
             date: event.target.date.value,
             category: event.target.category.value,
@@ -22,7 +24,7 @@ async function addexpense(event) {
             amount: parseInt(event.target.amount.value)
         }
 
-        const res = await axios.post("http://localhost:3000/expense/addexpense", expensedetails);
+        const res = await axios.post("http://localhost:3000/expense/addexpense", expensedetails , {headers : {"Authorization" : token}});
 
         if (res.status === 200) {
             
@@ -41,7 +43,8 @@ async function addexpense(event) {
 
 async function getallexpense() {
     try {
-        const res = await axios.get("http://localhost:3000/expense/allexpense");
+        const token = localStorage.getItem('token');
+        const res = await axios.get("http://localhost:3000/expense/allexpense" , {headers : {"Authorization" : token}});
 
         if (res.status === 200) {
 
@@ -78,8 +81,8 @@ function addExpensetoUi(expense) {
 
 async function deleteExpense(e, expenseid) {
     try {
-
-        const res = await axios.delete(`http://localhost:3000/expense/deleteexpense/${expenseid}`)
+        const token = localStorage.getItem('token');
+        const res = await axios.delete(`http://localhost:3000/expense/deleteexpense/${expenseid}` , {headers : {"Authorization" : token}})
 
         if (res.status === 200) {
 

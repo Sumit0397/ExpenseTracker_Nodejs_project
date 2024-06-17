@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const sequelize = require("./utils/database");
 const dotnenv = require("dotenv");
+const User = require("./models/userModel");
+const Expense = require("./models/expenseModel");
 
 dotnenv.config();
 
@@ -22,6 +24,9 @@ app.use("/user" , userRouter);
 app.use("/homepage" , expenseRouter);
 
 app.use("/expense" , expenseRouter);
+
+User.hasMany(Expense);
+Expense.belongsTo(User);
 
 sequelize.sync()
 .then(() => {
