@@ -1,10 +1,9 @@
 const hamburger = document.querySelector(".hamburger");
 const mobile_nav_section = document.querySelector(".mobile-nav-section");
 
-hamburger.addEventListener("click" , () => {
+hamburger.addEventListener("click", () => {
     hamburger.classList.toggle("active");
     mobile_nav_section.classList.toggle("show");
-    // console.log(hamburger);
 })
 
 function logout() {
@@ -24,10 +23,10 @@ async function addexpense(event) {
             amount: parseInt(event.target.amount.value)
         }
 
-        const res = await axios.post("http://localhost:3000/expense/addexpense", expensedetails , {headers : {"Authorization" : token}});
+        const res = await axios.post("http://localhost:3000/expense/addexpense", expensedetails, { headers: { "Authorization": token } });
 
         if (res.status === 200) {
-            
+
             addExpensetoUi(res.data);
 
             event.target.date.value = "";
@@ -44,7 +43,7 @@ async function addexpense(event) {
 async function getallexpense() {
     try {
         const token = localStorage.getItem('token');
-        const res = await axios.get("http://localhost:3000/expense/allexpense" , {headers : {"Authorization" : token}});
+        const res = await axios.get("http://localhost:3000/expense/allexpense", { headers: { "Authorization": token } });
 
         if (res.status === 200) {
 
@@ -82,12 +81,12 @@ function addExpensetoUi(expense) {
 async function deleteExpense(e, expenseid) {
     try {
         const token = localStorage.getItem('token');
-        const res = await axios.delete(`http://localhost:3000/expense/deleteexpense/${expenseid}` , {headers : {"Authorization" : token}})
+        const res = await axios.delete(`http://localhost:3000/expense/deleteexpense/${expenseid}`, { headers: { "Authorization": token } })
 
         if (res.status === 200) {
 
             removeExpenseFromUi(expenseid);
-        }else{
+        } else {
             throw new Error('Failed to delete')
         }
 
@@ -103,4 +102,63 @@ function removeExpenseFromUi(expenseid) {
 }
 
 
-window.addEventListener("DOMContentLoaded", getallexpense);
+const premiumBtn = document.getElementById("buyPremiumBtn");
+const reportsLink = document.getElementById("reportsLink");
+const leaderBoardLink = document.getElementById("leaderBoardLink");
+
+async function buyPremium(e) {
+    const token = localStorage.getItem("token");
+    const res = await axios.get(
+        "http://localhost:3000/purchase/premiummembership",
+        { headers: { "Authorization": token } }
+    );
+    var options = {
+        key: res.data.key_id, // Enter the Key ID generated from the Dashboard
+        order_id: res.data.order.id, // For one time payment
+        // This handler function will handle the success payment
+        handler: async function (response) {
+            const res = await axios.post(
+                "http://localhost:3000/purchase/updatetransactionstatus",
+                {
+                    order_id: options.order_id,
+                    payment_id: response.razorpay_payment_id,
+                },
+                { headers: { "Authorization": token } }
+            );
+
+            alert(
+                "Welcome to our Premium Membership, You have now access to Reports and LeaderBoard"
+            );
+        },
+    };
+    const rzp1 = new Razorpay(options);
+    rzp1.open();
+    e.preventDefault();
+
+    rzp1.on('payment.failed', function (response) {
+        console.log(response)
+        alert('Something went wrong')
+    });
+}
+
+premiumBtn.addEventListener("click", buyPremium);
+
+async function isPremiumUser() {
+    const token = localStorage.getItem('token');
+    const res = await axios.get("http://localhost:3000/user/ispremiumuser", {
+        headers: { "Authorization": token }
+    });
+    if(res.data.isPremiumUser){
+        premiumBtn.innerHTML = "Premium Member &#128081";
+        premiumBtn.disabled = true;
+        reportsLink.removeAttribute("onclick");
+        leaderBoardLink.removeAttribute("onclick");
+    }
+}
+
+
+// window.addEventListener("DOMContentLoaded", getallexpense , isPremiumUser);
+window.addEventListener("DOMContentLoaded", () => {
+    getallexpense();
+    isPremiumUser();
+});
