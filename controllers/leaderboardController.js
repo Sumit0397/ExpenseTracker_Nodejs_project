@@ -1,6 +1,7 @@
 const path = require("path");
 const User = require("../models/userModel");
 const Expense = require("../models/expenseModel");
+const sequelize = require("../utils/database");
 
 const leaderboardPage = (req,res,next) => {
     res.sendFile(path.join(__dirname,"../","public","views","leaderboard.html"));
@@ -8,27 +9,19 @@ const leaderboardPage = (req,res,next) => {
 
 const getPremiumLeaders = async (req,res,next) => {
     try {
-        const users = await User.findAll();
-        const expenses = await Expense.findAll();
-        const userAggregatedExpenses = {};
+        const leaderboardusers = await User.findAll({
+            attributes : ["id" , "name" , [sequelize.fn('sum' , sequelize.col('amount')) , 'total_cost']] ,
+            include : [
+                {
+                    model : Expense,
+                    attributes : []
+                }
+            ],
+            group : ["id"],
+            order : [["total_cost" , "DESC"]]
+        });
 
-        expenses.forEach((expense) => {
-            if(userAggregatedExpenses[expense.userId]){
-                userAggregatedExpenses[expense.userId] += expense.amount;
-            }else{
-                userAggregatedExpenses[expense.userId] = expense.amount;
-            }
-        })
-
-        const userLedaerBoardDetails = [];
-
-        users.forEach((user) => {
-            userLedaerBoardDetails.push({name : user.name , total_cost : userAggregatedExpenses[user.id] || 0});
-        })
-
-        userLedaerBoardDetails.sort((a,b) => b.total_cost - a.total_cost);
-
-        res.status(200).json(userLedaerBoardDetails);
+        res.status(200).json(leaderboardusers);
 
     } catch (error) {
         console.log(error);
