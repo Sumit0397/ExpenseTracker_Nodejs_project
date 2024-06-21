@@ -133,6 +133,8 @@ async function buyPremium(e) {
             alert(
                 "Welcome to our Premium Membership, You have now access to Reports and LeaderBoard"
             );
+
+            window.location.reload();
         },
     };
     const rzp1 = new Razorpay(options);

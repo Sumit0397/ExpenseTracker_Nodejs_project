@@ -226,3 +226,75 @@ a:hover{
         margin-bottom: 10px;
     }
 }
+
+/* leaderboard table */
+
+.leader-table-container{
+    margin: auto;
+    max-width: 1200px;
+    margin-top: 20px;
+    padding: 1rem 0rem;
+}
+
+table{
+    width: 90%;
+    padding: 1.2rem 0.6rem;
+    background-color: rgb(32, 84, 136);
+    margin: 20px auto;
+    border-radius: 16px;
+}
+
+thead tr{
+    background-color: aliceblue;
+}
+
+thead tr th{
+    width: 33%;
+}
+
+tbody tr{
+    background-color: rgb(109, 175, 208);
+    color: #fff;
+    text-align: center;
+}
+
+td{
+    padding: 0.6rem;
+}
+
+.leader-header{
+    background-color: rgb(32, 84, 136);
+    color: #fff;
+    width: fit-content;
+    margin: auto;
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+@media screen and (max-width : 990px) {
+    .leader-table-container{
+        max-width: 90%;
+    }
+
+
+}
+
+@media screen and (max-width : 550px) {
+    .leader-table-container{
+        max-width: 98%;
+    }
+
+    table{
+        padding: 0.6rem;
+    }
+
+    th{
+        font-size: 0.7rem;
+        padding: 0.2rem;
+    }
+
+    td{
+        font-size: 0.5rem;
+    }
+}

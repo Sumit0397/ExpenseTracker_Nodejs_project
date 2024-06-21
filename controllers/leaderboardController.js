@@ -10,15 +10,7 @@ const leaderboardPage = (req,res,next) => {
 const getPremiumLeaders = async (req,res,next) => {
     try {
         const leaderboardusers = await User.findAll({
-            attributes : ["id" , "name" , [sequelize.fn('sum' , sequelize.col('amount')) , 'total_cost']] ,
-            include : [
-                {
-                    model : Expense,
-                    attributes : []
-                }
-            ],
-            group : ["id"],
-            order : [["total_cost" , "DESC"]]
+            order : [["totalExpense" , "DESC"]]
         });
 
         res.status(200).json(leaderboardusers);
