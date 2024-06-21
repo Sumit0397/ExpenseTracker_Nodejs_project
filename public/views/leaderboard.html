@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeaderBoard</title>
+    <link rel="stylesheet" href="../css/leaderboard.css">
+</head>
+
+<body>
+
+    <!-- Navbar Section start -->
+
+    <div class="navbar-container">
+        <header>
+            <section class="logo-section">
+                <img src="../img/rupee.png" alt="rupee" class="rupee-logo" style="color: #fff;">
+                <h1 class="logo-title">Expensify</h1>
+            </section>
+            <nav class="nav-section">
+                <ul class="left-links">
+                    <li>
+                        <a href="/homepage">Home</a>
+                    </li>
+                    <li>
+                        <a href="#" id="reportsLink">Reports &#128081</a>
+                    </li>
+                    <li>
+                        <a href="#" id="leaderBoardLink">LeaderBoard &#128081</a>
+                    </li>
+                </ul>
+
+                <section class="right-links">
+                    <button class="btn transparent">
+                        You are a Premium User
+                    </button>
+                    <button class="btn solid" onclick="logout()">
+                        Log out
+                    </button>
+                </section>
+            </nav>
+            <section class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </section>
+        </header>
+        <nav class="mobile-nav-section">
+            <ul>
+                <li>
+                    <a href="/homepage">Home</a>
+                </li>
+                <li>
+                    <a href="#" id="reportsLink">Reports &#128081</a>
+                </li>
+                <li>
+                    <a href="#" id="leaderboardLink">LeaderBoard &#128081</a>
+                </li>
+            </ul>
+            <section class="mobile-nav-button">
+                <button class="btn transparent">
+                    You are a Premium User
+                </button>
+                <button class="btn solid" onclick="logout()">
+                    Log out
+                </button>
+            </section>
+        </nav>
+    </div>
+
+    <!-- Navbar Section end -->
+
+    
+
+    <script src="../js/leaderboard.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js"
+        integrity="sha512-JSCFHhKDilTRRXe9ak/FJ28dcpOJxzQaCd3Xg8MyF6XFjODhy/YMCM8HW0TFDckNHWUewW+kfvhin43hKtJxAw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    </script>
+
+</body>
+
+</html>

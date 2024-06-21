@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: rgb(187, 226, 247);
+}
+
+
+/* style for navbar */
+
+.navbar-container{
+    position: relative;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 65px;
+    padding: 5px 16px;
+    margin: auto;
+    background-color: rgb(32, 84, 136);
+    color: #fff;
+    border-bottom: 2px solid black;
+    position: sticky;
+    top: 0;
+    z-index: 6;
+}
+
+.logo-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 20%;
+}
+
+.rupee-logo{
+    width: 40px;
+    height: 40px;
+    border: 1px solid #fff;
+}
+
+nav{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.left-links{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    list-style: none;
+}
+
+.left-links a{
+    text-decoration: none;
+    color: #fff;
+}
+
+.btn{
+    width: 140px;
+    height: 49px;
+    border-radius: 49px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.btn:active{
+    transform: scale(0.95);
+}
+
+.btn.transparent{
+    width: fit-content;
+    font-size: 12px;
+    background: none;
+    border: 2px solid #fff;
+    color: #fff;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.btn.solid{
+    background-color: rgb(212, 87, 87);
+    color: #fff;
+    border: 2px solid #fff;
+}
+
+.hamburger{
+    display: none;
+}
+
+.bar {
+    display: block;
+    width: 30px;
+    height: 3px;
+    margin: 3px;
+    background-color: #fff; /* Change color as needed */
+    transition: all 0.3s ease;
+}
+
+/* Toggle class to animate the spans */
+.hamburger.active .bar:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+.hamburger:hover{
+    cursor: pointer;
+}
+
+.mobile-nav-section{
+    display: none;
+    position: absolute;
+    transition: transform 0.8s ease-in-out;
+    width: 100%;
+    background-color: rgb(32, 84, 136);
+    transform: translateY(-100px);
+    z-index: 4;
+}
+
+.mobile-nav-section{
+    padding: 12px 10px;
+}
+
+.mobile-nav-button > ul > li{
+    margin: 10px 0;
+}
+
+a{
+    text-decoration: none;
+    color: #fff;
+}
+
+a:hover{
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.mobile-nav-section.show{
+    transform: translateY(0%);
+}
+
+.mobile-nav-button{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mobile-nav-button > button{
+    margin: 10px 0px;
+}
+
+
+@media screen and (max-width: 990px) {
+    .logo-section{
+        width: max-content;
+    }
+
+    .nav-section{
+        display: none;
+    }
+
+    .hamburger{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .mobile-nav-section {
+        display: flex; /* Change this to make it flex initially */
+        justify-content: space-around;
+        align-items: center;
+        height: 0;
+        overflow: hidden; /* Hide overflowing content */
+        transition: height 0.8s ease-in-out; /* Transition for height */
+    }
+
+    .mobile-nav-section.show {
+        height: 50vh; /* Set the height to full screen height */
+    }
+
+    .mobile-nav-section ul{
+        list-style: none;
+    }
+
+    .mobile-nav-section ul li {
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (max-width : 400px) {
+    .mobile-nav-section{
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .mobile-nav-section ul{
+        list-style: none;
+    }
+
+    .mobile-nav-section ul li {
+        margin-bottom: 10px;
+    }
+}

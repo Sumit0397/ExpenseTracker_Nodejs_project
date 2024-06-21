@@ -106,6 +106,10 @@ const premiumBtn = document.getElementById("buyPremiumBtn");
 const reportsLink = document.getElementById("reportsLink");
 const leaderBoardLink = document.getElementById("leaderBoardLink");
 
+const mobilePremiumBtn = document.getElementById("buyPremiumBtnmobile");
+const reportsLinkMobile = document.getElementById("reportsLinkmobile");
+const leaderBoardLinkMobile = document.getElementById("leaderboardLinkmobile");
+
 async function buyPremium(e) {
     const token = localStorage.getItem("token");
     const res = await axios.get(
@@ -142,6 +146,7 @@ async function buyPremium(e) {
 }
 
 premiumBtn.addEventListener("click", buyPremium);
+mobilePremiumBtn.addEventListener("click" , buyPremium);
 
 async function isPremiumUser() {
     const token = localStorage.getItem('token');
@@ -149,10 +154,20 @@ async function isPremiumUser() {
         headers: { "Authorization": token }
     });
     if(res.data.isPremiumUser){
-        premiumBtn.innerHTML = "Premium Member &#128081";
+        premiumBtn.innerHTML = "You are a Premium User";
         premiumBtn.disabled = true;
+        mobilePremiumBtn.innerHTML = "You are a Premium User";
+        mobilePremiumBtn.disabled = true;
+        premiumBtn.style.fontSize = '12px';
+        premiumBtn.style.width = "fit-content";
+        premiumBtn.style.paddingLeft = "5px";
+        premiumBtn.style.paddingRight = "5px";
         reportsLink.removeAttribute("onclick");
         leaderBoardLink.removeAttribute("onclick");
+        reportsLinkMobile.removeAttribute("onclick");
+        leaderBoardLinkMobile.removeAttribute("onclick");
+        leaderBoardLink.setAttribute("href" , "/premium/getleaderboardpage");
+        leaderBoardLinkMobile.setAttribute("href" , "/premium/getleaderboardpage");
     }
 }
 
