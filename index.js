@@ -6,6 +6,7 @@ const dotnenv = require("dotenv");
 const User = require("./models/userModel");
 const Expense = require("./models/expenseModel");
 const Order = require("./models/ordersModel");
+const ResetPassword = require("./models/resetPasswordModel");
 
 dotnenv.config();
 
@@ -40,6 +41,9 @@ Expense.belongsTo(User);
 
 User.hasMany(Order);
 Order.belongsTo(User);
+
+User.hasMany(ResetPassword);
+ResetPassword.belongsTo(User);
 
 sequelize.sync()
 .then(() => {

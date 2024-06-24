@@ -11,7 +11,7 @@ async function resetpassword(event){
             alert(res.data.message);
             event.target.email.value = "";
         }else{
-            alert('There are some issue when reseting your password');
+            alert('There are some issue when sending link to your email');
         }
     } catch (error) {
         alert(error.message);

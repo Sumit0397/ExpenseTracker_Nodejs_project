@@ -9,4 +9,8 @@ router.get("/forgotpasswordpage" , forgotpasswordController.getForgotPasswordPag
 
 router.post("/sendmail" , forgotpasswordController.sendMail);
 
+router.get("/resetpassword/:id" , forgotpasswordController.resetpasswordPage);
+
+router.put("/updatepassword/:id" , forgotpasswordController.updatePassword);
+
 module.exports = router;
