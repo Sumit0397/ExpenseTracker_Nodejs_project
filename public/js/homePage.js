@@ -170,6 +170,8 @@ async function isPremiumUser() {
         leaderBoardLinkMobile.removeAttribute("onclick");
         leaderBoardLink.setAttribute("href" , "/premium/getleaderboardpage");
         leaderBoardLinkMobile.setAttribute("href" , "/premium/getleaderboardpage");
+        reportsLink.setAttribute("href" , "/premium/getreportpage");
+        reportsLinkMobile.setAttribute("href" , "/premium/getreportpage");
     }
 }
 

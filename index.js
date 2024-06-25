@@ -17,6 +17,7 @@ const expenseRouter = require("./routers/expenseRouter");
 const purchasMembershipeRouter = require("./routers/purchaseMembershipRouter");
 const leaderboardRouter = require("./routers/leaderboardRouter");
 const forgotpasswordRouter = require("./routers/forgotpasswordRouter");
+const reportsRouter = require("./routers/reportsRouter");
 
 app.use(bodyParser.urlencoded({extended : false}));
 app.use(bodyParser.json());
@@ -35,6 +36,8 @@ app.use("/purchase" , purchasMembershipeRouter);
 app.use("/premium" , leaderboardRouter);
 
 app.use("/password" , forgotpasswordRouter);
+
+app.use("/premium" , reportsRouter);
 
 User.hasMany(Expense);
 Expense.belongsTo(User);

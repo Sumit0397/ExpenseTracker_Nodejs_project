@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports</title>
+    <link rel="stylesheet" href="../css/reports.css">
+</head>
+
+<body>
+    <!-- NAVBAR SECTION START -->
+
+    <div class="navbar-container">
+        <header>
+            <section class="logo-section">
+                <img src="../img/rupee.png" alt="rupee" class="rupee-logo" style="color: #fff;">
+                <h1 class="logo-title">Expensify</h1>
+            </section>
+            <nav class="nav-section">
+                <ul class="left-links">
+                    <li>
+                        <a href="/homepage">Home</a>
+                    </li>
+                    <li>
+                        <a href="/premium/getreportpage" id="reportsLink">Reports &#128081</a>
+                    </li>
+                    <li>
+                        <a href="/premium/getleaderboardpage" id="leaderBoardLink">LeaderBoard &#128081</a>
+                    </li>
+                    <li>
+                        <a href="#">Download Reports</a>
+                    </li>
+                </ul>
+
+                <section class="right-links">
+                    <button class="btn transparent">
+                        You are a Premium User
+                    </button>
+                    <button class="btn solid" onclick="logout()">
+                        Log out
+                    </button>
+                </section>
+            </nav>
+            <section class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </section>
+        </header>
+        <nav class="mobile-nav-section">
+            <ul>
+                <li>
+                    <a href="/homepage">Home</a>
+                </li>
+                <li>
+                    <a href="/premium/getreportpage" id="reportsLinkmobile">Reports &#128081</a>
+                </li>
+                <li>
+                    <a href="/premium/getleaderboardpage" id="leaderboardLinkmobile">LeaderBoard &#128081</a>
+                </li>
+                <li>
+                    <a href="#">Download Reports</a>
+                </li>
+            </ul>
+            <section class="mobile-nav-button">
+                <button class="btn transparent">
+                    You are a Premium User
+                </button>
+                <button class="btn solid" onclick="logout()">
+                    Log out
+                </button>
+            </section>
+        </nav>
+    </div>
+
+    <!-- NAVBAR SECTION END -->
+
+    <!-- REPORTS SECTION START -->
+
+    <!-- DAILY REPORTS -->
+
+    <div class="leader-header">
+        <h1>
+            Daily Reports &#128081
+        </h1>
+        <div style="text-align: center;">
+            <p>SELECT DATE:</p>
+            <input type="date" name="date" id="date">
+        </div>
+        <div style="width: 100%;">
+            <button style="width: 100%;">SHOW</button>
+        </div>
+    </div>
+
+    <section class="leader-table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+
+            <tbody id="leader_table">
+                <tr class="result" id="year-result">
+                    <th></th>
+                    <th></th>
+                    <th>Total</th>
+                    <th>&#8377; 10000</th>
+                </tr>
+            <tbody>
+        </table>
+    </section>
+
+    <!-- MONTHLY REPORTS -->
+
+    <div class="leader-header">
+        <h1>
+            Monthly Reports &#128081
+        </h1>
+        <div style="text-align: center;">
+            <p>SELECT MONTH:</p>
+            <input type="month" name="month" id="month">
+        </div>
+        <div style="width: 100%;">
+            <button style="width: 100%;">SHOW</button>
+        </div>
+    </div>
+
+    <section class="leader-table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+
+            <tbody id="leader_table">
+                <tr class="result" id="year-result">
+                    <th></th>
+                    <th></th>
+                    <th>Total</th>
+                    <th>&#8377; 10000</th>
+                </tr>
+            <tbody>
+        </table>
+    </section>
+
+    <!-- YEARLY REPORTS -->
+
+    <div class="leader-header">
+        <h1>
+            Yeraly Reports &#128081
+        </h1>
+        <div style="text-align: center;">
+            <p>SELECT YEAR:</p>
+            <select id="year-input" name="year-input">
+                <option value="">Select year</option>
+                <option value="2015">2015</option>
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+                <option value="2020">2020</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+            </select>
+        </div>
+        <div style="width: 100%;">
+            <button style="width: 100%;">SHOW</button>
+        </div>
+    </div>
+
+    <section class="leader-table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+
+            <tbody id="leader_table">
+                <tr class="result" id="year-result">
+                    <th></th>
+                    <th></th>
+                    <th>Total</th>
+                    <th>&#8377; 10000</th>
+                </tr>
+            <tbody>
+        </table>
+    </section>
+
+
+    <!-- REPORTS SECTION END -->
+
+    <script src="../js/reports.js"></script>
+</body>
+
+</html>
