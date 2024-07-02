@@ -2,9 +2,57 @@ const path = require('path');
 const Expense = require("../models/expenseModel");
 const User = require("../models/userModel");
 const sequelize = require("../utils/database");
+const AWS = require("aws-sdk");
+
+require("dotenv").config();
 
 const getHomePage = (req, res, next) => {
     res.sendFile(path.join(__dirname, "../", "public", "views", "homepage.html"));
+}
+
+function uploadToS3(data , fileName){
+    const BUCKET_NAME = process.env.S3_BUCKET_NAME;
+    const IAM_USER_ID = process.env.IAM_USER_KEY_ID;
+    const IAM_USER_SECRET_KEY = process.env.IAM_USER_SECRET_KEY;
+
+    const s3Bucket = new AWS.S3({
+        accessKeyId : IAM_USER_ID,
+        secretAccessKey : IAM_USER_SECRET_KEY
+    });
+
+    const params = {
+        Bucket : BUCKET_NAME,
+        Key : fileName,
+        Body : data,
+        ACL : 'public-read'
+    }
+
+    return new Promise((resolve , reject) => {
+        s3Bucket.upload(params , (err , s3response) => {
+            if(err){
+                console.log("something went wrong", err);
+                reject(err);
+            }else{
+                resolve(s3response.Location);
+            }
+        })
+    })
+}
+
+const downloadExpenses = async (req,res) => {
+    try {
+        const expenses = await req.user.getExpenses();
+        const stringifyExpenseData = JSON.stringify(expenses);
+    
+        const userId = req.user.id;
+    
+        const fileName = `Expenses${userId}/${new Date()}.txt`;
+        const fileurl = await uploadToS3(stringifyExpenseData , fileName);
+    
+        res.status(200).json({fileurl , success : true});
+    } catch (error) {
+        res.status(500).json({fileurl : "" , success : false , message : error.message});
+    }
 }
 
 const addExpense = async (req, res, next) => {
@@ -76,5 +124,6 @@ module.exports = {
     getHomePage,
     addExpense,
     getAllExpenses,
-    deleteExpense
+    deleteExpense,
+    downloadExpenses
 }

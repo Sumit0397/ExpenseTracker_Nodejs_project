@@ -29,7 +29,7 @@
                         <a href="/premium/getleaderboardpage" id="leaderBoardLink">LeaderBoard &#128081</a>
                     </li>
                     <li>
-                        <a href="#">Download Reports</a>
+                        <button id="downloadexpense" onclick="download()">Download Reports</button>
                     </li>
                 </ul>
 
@@ -89,7 +89,7 @@
             <input type="date" name="date" id="date">
         </div>
         <div style="width: 100%;">
-            <button style="width: 100%;">SHOW</button>
+            <button style="width: 100%;" id="show-daily">SHOW</button>
         </div>
     </div>
 
@@ -104,14 +104,12 @@
                 </tr>
             </thead>
 
-            <tbody id="leader_table">
-                <tr class="result" id="year-result">
-                    <th></th>
-                    <th></th>
-                    <th>Total</th>
-                    <th>&#8377; 10000</th>
-                </tr>
+            <tbody id="daily_report">
+
             <tbody>
+            <tfoot id="daily_result">
+                
+            </tfoot>
         </table>
     </section>
 
@@ -126,7 +124,7 @@
             <input type="month" name="month" id="month">
         </div>
         <div style="width: 100%;">
-            <button style="width: 100%;">SHOW</button>
+            <button style="width: 100%;" id="show-monthly">SHOW</button>
         </div>
     </div>
 
@@ -141,14 +139,12 @@
                 </tr>
             </thead>
 
-            <tbody id="leader_table">
-                <tr class="result" id="year-result">
-                    <th></th>
-                    <th></th>
-                    <th>Total</th>
-                    <th>&#8377; 10000</th>
-                </tr>
+            <tbody id="month_report">
+                
             <tbody>
+            <tfoot id="month_result">
+                
+            </tfoot>
         </table>
     </section>
 
@@ -175,7 +171,7 @@
             </select>
         </div>
         <div style="width: 100%;">
-            <button style="width: 100%;">SHOW</button>
+            <button style="width: 100%;" id="show-yearly">SHOW</button>
         </div>
     </div>
 
@@ -190,14 +186,12 @@
                 </tr>
             </thead>
 
-            <tbody id="leader_table">
-                <tr class="result" id="year-result">
-                    <th></th>
-                    <th></th>
-                    <th>Total</th>
-                    <th>&#8377; 10000</th>
-                </tr>
+            <tbody id="year_report">
+                
             <tbody>
+            <tfoot id="year_result">
+                
+            </tfoot>
         </table>
     </section>
 
@@ -205,6 +199,10 @@
     <!-- REPORTS SECTION END -->
 
     <script src="../js/reports.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js"
+        integrity="sha512-JSCFHhKDilTRRXe9ak/FJ28dcpOJxzQaCd3Xg8MyF6XFjODhy/YMCM8HW0TFDckNHWUewW+kfvhin43hKtJxAw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    </script>
 </body>
 
 </html>

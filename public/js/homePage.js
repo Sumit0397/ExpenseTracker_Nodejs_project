@@ -6,8 +6,13 @@ hamburger.addEventListener("click", () => {
     mobile_nav_section.classList.toggle("show");
 })
 
-function logout() {
-    window.location.href = "/";
+async function logout() {
+    try {
+        localStorage.clear();
+        window.location.href = "/";
+    } catch (error) {
+        alert(error.message);
+    }
 }
 
 async function addexpense(event) {
