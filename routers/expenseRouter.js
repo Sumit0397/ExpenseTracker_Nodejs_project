@@ -9,7 +9,7 @@ expenserouter.get("/" , expenseController.getHomePage);
 
 expenserouter.post("/addexpense" , authorization.authenticate , expenseController.addExpense);
 
-expenserouter.get("/allexpense" , authorization.authenticate , expenseController.getAllExpenses);
+expenserouter.get("/allexpense/:page" , authorization.authenticate , expenseController.getAllExpensesForPagination);
 
 expenserouter.delete("/deleteexpense/:expenseid" , authorization.authenticate , expenseController.deleteExpense);
 

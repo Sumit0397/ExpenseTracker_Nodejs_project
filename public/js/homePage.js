@@ -38,49 +38,12 @@ async function addexpense(event) {
             event.target.category.value = "";
             event.target.description.value = "";
             event.target.amount.value = "";
+
+            window.location.reload();
         }
     } catch (error) {
         console.log(error.message);
     }
-}
-
-
-async function getallexpense() {
-    try {
-        const token = localStorage.getItem('token');
-        const res = await axios.get("http://localhost:3000/expense/allexpense", { headers: { "Authorization": token } });
-
-        if (res.status === 200) {
-
-            res.data.forEach((expense) => {
-                addExpensetoUi(expense);
-            })
-        }
-    } catch (error) {
-        console.log(error.message);
-    }
-}
-
-
-function addExpensetoUi(expense) {
-    const expense_table = document.getElementById("expense_table");
-    const expenseElemId = `expense-${expense.id}`;
-
-    expense_table.innerHTML += `
-                <tr id=${expenseElemId}>
-                    <td>${expense.date}</td>
-                    <td>${expense.category}</td>
-                    <td>${expense.description}</td>
-                    <td>&#8377; ${expense.amount}</td>
-                    <td>
-                        <button class="edit-btn">Edit</button>
-                        <button class="delete-btn" onclick='deleteExpense(event , ${expense.id})'>Delete</button>
-
-                        <button class="edit-btn-mobile">🖊️</button>
-                        <button class="delete-btn-mobile" onclick='deleteExpense(event , ${expense.id})'>🚮</button>
-                    </td>
-                </tr>
-    `
 }
 
 async function deleteExpense(e, expenseid) {
@@ -104,6 +67,7 @@ async function deleteExpense(e, expenseid) {
 function removeExpenseFromUi(expenseid) {
     const expenseElemId = `expense-${expenseid}`;
     document.getElementById(expenseElemId).remove();
+    window.location.reload();
 }
 
 
@@ -153,14 +117,14 @@ async function buyPremium(e) {
 }
 
 premiumBtn.addEventListener("click", buyPremium);
-mobilePremiumBtn.addEventListener("click" , buyPremium);
+mobilePremiumBtn.addEventListener("click", buyPremium);
 
 async function isPremiumUser() {
     const token = localStorage.getItem('token');
     const res = await axios.get("http://localhost:3000/user/ispremiumuser", {
         headers: { "Authorization": token }
     });
-    if(res.data.isPremiumUser){
+    if (res.data.isPremiumUser) {
         premiumBtn.innerHTML = "You are a Premium User";
         premiumBtn.disabled = true;
         mobilePremiumBtn.innerHTML = "You are a Premium User";
@@ -173,16 +137,80 @@ async function isPremiumUser() {
         leaderBoardLink.removeAttribute("onclick");
         reportsLinkMobile.removeAttribute("onclick");
         leaderBoardLinkMobile.removeAttribute("onclick");
-        leaderBoardLink.setAttribute("href" , "/premium/getleaderboardpage");
-        leaderBoardLinkMobile.setAttribute("href" , "/premium/getleaderboardpage");
-        reportsLink.setAttribute("href" , "/premium/getreportpage");
-        reportsLinkMobile.setAttribute("href" , "/premium/getreportpage");
+        leaderBoardLink.setAttribute("href", "/premium/getleaderboardpage");
+        leaderBoardLinkMobile.setAttribute("href", "/premium/getleaderboardpage");
+        reportsLink.setAttribute("href", "/premium/getreportpage");
+        reportsLinkMobile.setAttribute("href", "/premium/getreportpage");
     }
 }
 
-
-// window.addEventListener("DOMContentLoaded", getallexpense , isPremiumUser);
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener('DOMContentLoaded', () => {
     getallexpense();
     isPremiumUser();
+    document.getElementById('record').addEventListener('change', handleRecordChange);
 });
+
+async function handleRecordChange() {
+    const selectedLimit = document.getElementById('record').value;
+    await getallexpense(1, selectedLimit); // Fetch data for the first page with the selected limit
+}
+
+async function getallexpense(page = 1, limit = 5) {
+    try {
+        const token = localStorage.getItem('token');
+        const res = await axios.get(`http://localhost:3000/expense/allexpense/${page}?limit=${limit}`, { headers: { "Authorization": token } });
+
+        if (res.status === 200) {
+            // Clear existing expenses and pagination
+            const expense_table = document.getElementById("expense_table");
+            expense_table.innerHTML = "";
+
+            const pagination = document.getElementById("pagination");
+            pagination.innerHTML = "";
+
+            // Append new expenses
+            res.data.expenses.forEach((expense) => {
+                addExpensetoUi(expense);
+            });
+
+            // Append new pagination buttons
+            for (let i = 1; i <= res.data.totalPages; i++) {
+                const button = document.createElement('button');
+                button.setAttribute('class', "page-btn");
+                button.appendChild(document.createTextNode(i));
+                if(i === page){
+                    button.classList.add("active");
+                }
+                pagination.appendChild(button);
+                button.addEventListener("click", () => paginationBtn(i, limit));
+            }
+        }
+    } catch (error) {
+        alert(error.message);
+    }
+}
+
+async function paginationBtn(page, limit) {
+    await getallexpense(page, limit);
+}
+
+function addExpensetoUi(expense) {
+    const expense_table = document.getElementById("expense_table");
+    const expenseElemId = `expense-${expense.id}`;
+
+    expense_table.innerHTML += `
+        <tr id=${expenseElemId}>
+            <td>${expense.date}</td>
+            <td>${expense.category}</td>
+            <td>${expense.description}</td>
+            <td>&#8377; ${expense.amount}</td>
+            <td>
+                <button class="delete-btn" onclick='deleteExpense(event , ${expense.id})'>Delete</button>
+                <button class="delete-btn-mobile" onclick='deleteExpense(event , ${expense.id})'>🚮</button>
+            </td>
+        </tr>
+    `;
+}
+
+
+

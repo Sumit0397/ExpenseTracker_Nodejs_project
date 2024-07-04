@@ -365,20 +365,8 @@ td{
     padding: 0.6rem;
 }
 
-.edit-btn-mobile , .delete-btn-mobile{
+.delete-btn-mobile{
     display: none;
-}
-
-.edit-btn{
-    background-color: green;
-    color: #fff;
-    padding: 0.4rem 0.8rem;
-    text-transform: uppercase;
-    border-radius: 15px;
-    border: 1px solid #fff;
-    cursor: pointer;
-    font-weight: 500;
-    margin: 0.3rem;
 }
 
 .delete-btn{
@@ -393,7 +381,7 @@ td{
     margin: 0.3rem;
 }
 
-.edit-btn:active , .delete-btn:active{
+.delete-btn:active{
     transform: scale(0.95);
 }
 
@@ -424,14 +412,56 @@ td{
         font-size: 0.5rem;
     }
 
-    .edit-btn , .delete-btn{
+    .delete-btn{
         display: none;
     }
 
-    .edit-btn-mobile , .delete-btn-mobile{
+    .delete-btn-mobile{
         display: inline-block;
         margin: 0.3rem;
     }
 }
 
+/* PAGINATION STYLE */
+
+.records{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.records>label{
+    margin: 5px 5px;
+}
+
+.pagination{
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.page-btn{
+    border: none;
+    outline: none;
+    padding: 5px;
+    border-radius: 50%;
+    font-size: 14px;
+    background-color: blueviolet;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.page-btn:active{
+    transform: scale(1.3);
+}
+
+.page-btn.active {
+    background-color: darkblue; /* Change to the desired color */
+    color: white; /* Change to the desired text color */
+    font-weight: bold;
+}
 

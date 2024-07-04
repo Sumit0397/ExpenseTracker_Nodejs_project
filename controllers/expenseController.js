@@ -91,6 +91,34 @@ const getAllExpenses = async (req, res, next) => {
     }
 }
 
+const getAllExpensesForPagination = async (req,res,next) => {
+    try {
+        const page = parseInt(req.params.page , 10) || 1;
+        const limit = parseInt(req.query.limit , 10) || 5;
+        const offset = (page - 1) * limit;
+        const totalExpenses = await Expense.count(
+            {
+                where : { userId : req.user.id}
+            }
+        )
+        const totalPages = Math.ceil(totalExpenses/limit);
+
+        const expenses = await Expense.findAll(
+            {
+                where : {
+                    userId : req.user.id
+                },
+                offset : offset,
+                limit : limit
+            }
+        )
+
+        res.status(200).json({expenses : expenses , totalPages : totalPages , success : true});
+    } catch (error) {
+        res.status(500).json({message : error.message , success : false})
+    }
+}
+
 const deleteExpense = async (req, res, next) => {
     const t = await sequelize.transaction();
     try {
@@ -125,5 +153,6 @@ module.exports = {
     addExpense,
     getAllExpenses,
     deleteExpense,
-    downloadExpenses
+    downloadExpenses,
+    getAllExpensesForPagination
 }
